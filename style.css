@@ -1,0 +1,164 @@
+/* Reset dan dasar */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: #f0f0f0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Header */
+header {
+  text-align: center;
+  margin-bottom: 30px;
+  user-select: none;
+}
+
+header h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+  text-shadow: 0 0 10px #0ff;
+}
+
+header p {
+  font-size: 1.1rem;
+  color: #b3d4fc;
+  font-style: italic;
+}
+
+/* Main content */
+main {
+  width: 100%;
+  max-width: 900px;
+  background: rgba(20, 33, 56, 0.9);
+  border-radius: 16px;
+  padding: 30px 40px;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+/* Section styling */
+section {
+  margin-bottom: 40px;
+  border-bottom: 1.5px solid #0ff3;
+  padding-bottom: 30px;
+}
+
+section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+/* Section headings */
+section h2 {
+  font-size: 1.9rem;
+  margin-bottom: 18px;
+  color: #0ff;
+  letter-spacing: 1.2px;
+  text-shadow: 0 0 5px #0ff;
+}
+
+/* Labels */
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #a3e3ff;
+  user-select: none;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="number"] {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: none;
+  background: #16325c;
+  color: #e0f7ff;
+  font-size: 1rem;
+  margin-bottom: 18px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: inset 0 0 5px #0ff4;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+  outline: none;
+  background-color: #1a446e;
+  box-shadow: 0 0 10px #00ffffaa;
+}
+
+/* Buttons */
+button {
+  background: linear-gradient(90deg, #00ffe7, #00b5e2);
+  border: none;
+  padding: 14px 30px;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  color: #012;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.35s ease, color 0.35s ease, transform 0.2s ease;
+  box-shadow: 0 0 12px #00ffe7aa;
+  user-select: none;
+}
+
+button:hover {
+  background: linear-gradient(90deg, #00b5e2, #00ffe7);
+  color: #fff;
+  transform: scale(1.05);
+  box-shadow: 0 0 18px #00ffe7ff;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+/* Result box */
+.result {
+  margin-top: 15px;
+  padding: 20px;
+  border-radius: 14px;
+  background: rgba(0, 255, 255, 0.15);
+  color: #ccf8ff;
+  font-size: 1rem;
+  min-height: 80px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  box-shadow: inset 0 0 10px #00ffff99;
+  user-select: text;
+  transition: background-color 0.4s ease;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  main {
+    padding: 20px 25px;
+  }
+
+  section h2 {
+    font-size: 1.5rem;
+  }
+
+  input[type="text"],
+  input[type="number"] {
+    font-size: 0.95rem;
+  }
+
+  button {
+    width: 100%;
+    font-size: 1rem;
+  }
+}
