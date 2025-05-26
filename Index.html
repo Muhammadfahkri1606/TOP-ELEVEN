@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Top Eleven Analyzer AI</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <h1>Top Eleven Analyzer AI</h1>
+    <p>AI Online Aktif - Semua Rekomendasi Otomatis</p>
+  </header>
+
+  <main>
+
+    <!-- Analisis Atribut Pemain -->
+    <section>
+      <h2>⚽ Analisis Atribut Pemain</h2>
+      <label>Nama Pemain</label>
+      <input type="text" id="playerName">
+      <label>Kecepatan</label>
+      <input type="number" id="speed">
+      <label>Passing</label>
+      <input type="number" id="passing">
+      <label>Defending</label>
+      <input type="number" id="defending">
+      <label>Shooting</label>
+      <input type="number" id="shooting">
+      <button onclick="analyzePlayer()">Analisa Pemain</button>
+      <div id="resultPlayer" class="result"></div>
+    </section>
+
+    <!-- Analisis Taktik -->
+    <section>
+      <h2>🧠 Analisis Taktik & Gaya Bermain</h2>
+      <label>Formasi Tim</label>
+      <input type="text" id="formation">
+      <label>Gaya Bermain</label>
+      <input type="text" id="style">
+      <button onclick="analyzeTactics()">Analisa Taktik</button>
+      <div id="resultTactics" class="result"></div>
+    </section>
+
+    <!-- Counter Formasi Lawan -->
+    <section>
+      <h2>🛡️ Counter Formasi Lawan + Gaya Bermain</h2>
+      <label>Formasi Lawan</label>
+      <input type="text" id="enemyFormation">
+      <label>Gaya Bermain Lawan (jika ada)</label>
+      <input type="text" id="enemyStyle" placeholder="Opsional">
+      <button onclick="analyzeEnemy()">Saran Counter</button>
+      <div id="resultEnemy" class="result"></div>
+    </section>
+
+    <!-- Rekomendasi Latihan Pemain -->
+    <section>
+      <h2>🏋️ Rekomendasi Latihan Posisi & Role</h2>
+      <label>Posisi Pemain (ST, MC, DL, AMC, dll)</label>
+      <input type="text" id="trainingPosition" placeholder="Contoh: ST">
+      <label>Role Khusus (opsional)</label>
+      <input type="text" id="trainingRole" placeholder="Contoh: Target Man, Box to Box">
+      <button onclick="analyzeTraining()">Saran Latihan</button>
+      <div id="resultTraining" class="result"></div>
+    </section>
+
+    <!-- Fitur Baru: Wort Beli Pemain -->
+    <section>
+      <h2>💰 Wort Beli Pemain?</h2>
+      <label>Nama Pemain</label>
+      <input type="text" id="buyPlayerName" placeholder="Nama pemain">
+      <label>Kecepatan</label>
+      <input type="number" id="buySpeed" placeholder="Kecepatan">
+      <label>Passing</label>
+      <input type="number" id="buyPassing" placeholder="Passing">
+      <label>Defending</label>
+      <input type="number" id="buyDefending" placeholder="Defending">
+      <label>Shooting</label>
+      <input type="number" id="buyShooting" placeholder="Shooting">
+      <label>Harga Tawaran (misal dalam ribuan atau juta)</label>
+      <input type="number" id="buyPrice" placeholder="Harga tawaran">
+      <button onclick="analyzeBuy()">Cek Worth Beli</button>
+      <div id="resultBuy" class="result"></div>
+    </section>
+
+  </main>
+
+  <script>
+    const API_KEY = "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";
+
+    async function askAI(prompt, resultId) {
+      document.getElementById(resultId).innerHTML = "⏳ AI sedang menganalisis...";
+      try {
+        const res = await fetch("https://api.openai.com/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${API_KEY}`
+          },
+          body: JSON.stringify({
+            model: "gpt-3.5-turbo",
+            messages: [{ role: "user", content: prompt }],
+            max_tokens: 600,
+            temperature: 0.7
+          })
+        });
+
+        const data = await res.json();
+        document.getElementById(resultId).innerHTML = data.choices[0].message.content;
+      } catch (err) {
+        document.getElementById(resultId).innerHTML = "❌ Gagal mengakses AI.";
+      }
+    }
+
+    function analyzePlayer() {
+      const name = document.getElementById("playerName").value;
+      const speed = document.getElementById("speed").value;
+      const passing = document.getElementById("passing").value;
+      const defending = document.getElementById("defending").value;
+      const shooting = document.getElementById("shooting").value;
+
+      const prompt = `
+        Pemain Top Eleven:
+        Nama: ${name}
+        - Kecepatan: ${speed}
+        - Passing: ${passing}
+        - Defending: ${defending}
+        - Shooting: ${shooting}
+
+        Berikan analisa AI:
+        - Posisi terbaik
+        - Role yang cocok
+        - Gaya bermain cocok
+        - Kelemahan utama
+        - Saran latihan terbaik
+        - Rating total
+        - Strategi taktik cocok untuk pemain ini
+      `;
+
+      askAI(prompt, "resultPlayer");
+    }
+
+    function analyzeTactics() {
+      const formation = document.getElementById("formation").value;
+      const style = document.getElementById("style").value;
+
+      const prompt = `
+        Saya pakai formasi ${formation} dan gaya bermain "${style}".
+        Analisa AI:
+        - Kelebihan dan kekurangan formasi
+        - Tim lawan ideal yang cocok/lawan
+        - Variasi taktik berdasarkan situasi
+        - Pemain kunci dalam formasi tersebut
+        - Saran rotasi & mentalitas bermain
+      `;
+
+      askAI(prompt, "resultTactics");
+    }
+
+    function analyzeEnemy() {
+      const enemyForm = document.getElementById("enemyFormation").value;
+      const enemyStyle = document.getElementById("enemyStyle").value;
+
+      const prompt = `
+        Lawan pakai formasi ${enemyForm} dan gaya main "${enemyStyle}".
+        Analisa AI:
+        - Formasi terbaik untuk counter
+        - Gaya bermain yang bisa mengalahkan mereka
+        - Pemain kunci dan peran penting
+        - Tips in-game dan taktik perubahan saat tertinggal
+      `;
+
+      askAI(prompt, "resultEnemy");
+    }
+
+    function analyzeTraining() {
+      const pos = document.getElementById("trainingPosition").value;
+      const role = document.getElementById("trainingRole").value;
+
+      const prompt = `
+        Saya ingin melatih pemain di posisi ${pos} dengan role "${role}" di Top Eleven.
+        Berikan:
+        - Drill latihan yang direkomendasikan
+        - Atribut utama untuk difokuskan
+        - Tips peningkatan cepat
+        - Booster latihan opsional
+        - Rekomendasi variasi latihan harian
+      `;
+
+      askAI(prompt, "resultTraining");
+    }
+
+    // Fitur Baru: Wort Beli Pemain
+    function analyzeBuy() {
+      const name = document.getElementById("buyPlayerName").value;
+      const speed = document.getElementById("buySpeed").value;
+      const passing = document.getElementById("buyPassing").value;
+      const defending = document.getElementById("buyDefending").value;
+      const shooting = document.getElementById("buyShooting").value;
+      const price = document.getElementById("buyPrice").value;
+
+      const prompt = `
+        Saya ingin membeli pemain Top Eleven:
+        Nama: ${name}
+        Atribut:
+          - Kecepatan: ${speed}
+          - Passing: ${passing}
+          - Defending: ${defending}
+          - Shooting: ${shooting}
+        Harga tawaran: ${price} juta
+
+        Tolong analisa:
+        - Apakah pemain ini worth dibeli dengan harga tersebut?
+        - Berikan alasan kenapa layak atau tidak
+        - Saran jika ada harga ideal atau atribut harus ditingkatkan
+      `;
+
+      askAI(prompt, "resultBuy");
+    }
+  </script>
+
+</body>
+</html>
