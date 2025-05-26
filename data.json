@@ -1,0 +1,65 @@
+{
+  "players": [
+    {
+      "name": "Andi",
+      "speed": 85,
+      "passing": 78,
+      "defending": 60,
+      "shooting": 74,
+      "position": "Striker",
+      "role": "Poacher"
+    },
+    {
+      "name": "Budi",
+      "speed": 70,
+      "passing": 80,
+      "defending": 75,
+      "shooting": 65,
+      "position": "Midfielder",
+      "role": "Playmaker"
+    }
+  ],
+  "formations": [
+    {
+      "name": "4-3-3",
+      "description": "Formasi menyerang dengan 4 bek, 3 gelandang, dan 3 penyerang"
+    },
+    {
+      "name": "4-4-2",
+      "description": "Formasi seimbang dengan 4 bek, 4 gelandang, dan 2 penyerang"
+    }
+  ],
+  "trainingRecommendations": {
+    "Striker": {
+      "Poacher": [
+        "Latihan finishing",
+        "Latihan positioning",
+        "Latihan kecepatan"
+      ],
+      "Target Man": [
+        "Latihan heading",
+        "Latihan strength",
+        "Latihan hold-up play"
+      ]
+    },
+    "Midfielder": {
+      "Playmaker": [
+        "Latihan passing",
+        "Latihan vision",
+        "Latihan stamina"
+      ],
+      "Box-to-Box": [
+        "Latihan tackling",
+        "Latihan stamina",
+        "Latihan crossing"
+      ]
+    }
+  },
+  "playStyles": [
+    "Counter Attack",
+    "Possession",
+    "High Press",
+    "Long Ball",
+    "Tiki-Taka"
+  ]
+}
